@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KategoriController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,9 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $users = User::all();
+        return view('dashboard',compact('users'));
     })->name('dashboard');
+    Route::get('/kategori/all',[KategoriController::class,'index'])->name('kategori-all');
+    Route::post('/kategori/store',[KategoriController::class,'store'])->name('kategori-store');
 });

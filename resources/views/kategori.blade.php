@@ -28,28 +28,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
-                                    
-                                @php($i=1)
+
+
+                                
                                 @foreach ($kategori as $ini)
                                     <tr>
-                                        <th scope="row">{{$i++}}</th>
-                                        <td>{{$ini->kategori_nama}}</td>
-                                        <td>{{$ini->user_id}}</td>
-                                        @if ($ini->created_at == NULL)
+                                        <th scope="row">{{ $kategori->firstItem()+$loop->index}}</th>
+                                        <td>{{ $ini->kategori_nama }}</td>
+                                        <td>{{ $ini->user_id }}</td>
+                                        @if ($ini->created_at == null)
                                             <span class=" text-danger">Data Tidak Ditemukan</span>
                                         @else
-                                        <td>{{$ini->created_at->diffForHumans()}}</td> 
+                                            <td>{{ $ini->created_at->diffForHumans() }}</td>
                                         @endif
-                                        
+
                                     </tr>
                                 @endforeach
-                                
-
                             </tbody>
                         </table>
+                        {{ $kategori->links() }}
                     </div>
-
                 </div>
                 <div class=" col-md-4">
                     <div class=" card">

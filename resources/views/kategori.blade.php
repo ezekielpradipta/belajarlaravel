@@ -11,10 +11,11 @@
                 <div class=" col-md-8">
                     <div class="card">
                         @if (session('success'))
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>{{session('success')}}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                         @endif
                         <div class=" card-header">All Kategori </div>
                         <table class="table">
@@ -27,34 +28,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-    
-    
-    
+                              
+                                    
+                                @php($i=1)
+                                @foreach ($kategori as $ini)
+                                    <tr>
+                                        <th scope="row">{{$i++}}</th>
+                                        <td>{{$ini->kategori_nama}}</td>
+                                        <td>{{$ini->user_id}}</td>
+                                        @if ($ini->created_at == NULL)
+                                            <span class=" text-danger">Data Tidak Ditemukan</span>
+                                        @else
+                                        <td>{{$ini->created_at->diffForHumans()}}</td> 
+                                        @endif
+                                        
+                                    </tr>
+                                @endforeach
+                                
+
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
                 <div class=" col-md-4">
                     <div class=" card">
                         <div class=" card-header">Tambah Kategori</div>
                         <div class=" card-body">
-                            <form action="{{route('kategori-store')}}" method="POST">
+                            <form action="{{ route('kategori-store') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                  <label for="exampleInputEmail1" class="form-label">Kategori</label>
-                                  <input type="text" class="form-control" id="kategori_nama" name="kategori_nama" aria-describedby="emailHelp">
-                                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                                  @error('kategori_nama')
-                               <span class=" text-danger">{{$message}}</span>
-                                   
-                               @enderror
+                                    <label for="exampleInputEmail1" class="form-label">Kategori</label>
+                                    <input type="text" class="form-control" id="kategori_nama" name="kategori_nama"
+                                        aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                    </div>
+                                    @error('kategori_nama')
+                                        <span class=" text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                             
+
                                 <button type="submit" class="btn btn-primary">Tambah Kategori</button>
-                              </form>
+                            </form>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

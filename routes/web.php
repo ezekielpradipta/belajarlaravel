@@ -30,4 +30,6 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/kategori/all',[KategoriController::class,'index'])->name('kategori-all');
     Route::post('/kategori/store',[KategoriController::class,'store'])->name('kategori-store');
+    Route::get('/kategori/edit/{id}',[KategoriController::class,'edit']);
+    Route::post('/kategori/update/{id}',[KategoriController::class,'update']);
 });

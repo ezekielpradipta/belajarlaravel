@@ -25,6 +25,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,13 +36,13 @@
                                     <tr>
                                         <th scope="row">{{ $kategori->firstItem()+$loop->index}}</th>
                                         <td>{{ $ini->kategori_nama }}</td>
-                                        <td>{{ $ini->user_id }}</td>
+                                        <td>{{ $ini->user->name }}</td>
                                         @if ($ini->created_at == null)
                                             <span class=" text-danger">Data Tidak Ditemukan</span>
                                         @else
                                             <td>{{ $ini->created_at->diffForHumans() }}</td>
                                         @endif
-
+                                        <td> <a href="{{url('kategori/edit/'.$ini->id)}} " class=" btn btn-info">Edit</a> <a href="" class=" btn btn-danger">Delete</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

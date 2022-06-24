@@ -61,42 +61,16 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function show(Kategori $kategori)
-    {
-        //
-    }
+   public function edit($id){
+    $kategori = Kategori::find($id);
+    return view('kategori-edit',compact('kategori'));
+   }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kategori  $kategori
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kategori $kategori)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateKategoriRequest  $request
-     * @param  \App\Models\Kategori  $kategori
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateKategoriRequest $request, Kategori $kategori)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kategori  $kategori
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kategori $kategori)
-    {
-        //
-    }
+   public function update(Request $request, $id){
+        $update = Kategori::find($id)->update([
+            'kategori_nama' => $request->kategori_nama,
+            'user_id' => Auth::user()->id
+        ]);
+        return redirect()->route('kategori-all')->with('success','Berhasil');
+   }
 }

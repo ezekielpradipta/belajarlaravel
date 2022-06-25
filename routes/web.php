@@ -32,4 +32,7 @@ Route::middleware([
     Route::post('/kategori/store',[KategoriController::class,'store'])->name('kategori-store');
     Route::get('/kategori/edit/{id}',[KategoriController::class,'edit']);
     Route::post('/kategori/update/{id}',[KategoriController::class,'update']);
+    Route::get('/kategori/softdelete/{id}',[KategoriController::class,'softdelete']);
+    Route::get('/kategori/restore/{id}',[KategoriController::class,'restore']);
+    Route::get('/kategori/permadelete/{id}',[KategoriController::class,'permadelete']);
 });

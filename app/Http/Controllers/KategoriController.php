@@ -19,7 +19,8 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::paginate(5);
-       return view('kategori', compact('kategori'));
+        $trash = Kategori::onlyTrashed()->latest()->paginate(3);
+       return view('kategori', compact('kategori','trash'));
     }
 
     /**
@@ -72,5 +73,18 @@ class KategoriController extends Controller
             'user_id' => Auth::user()->id
         ]);
         return redirect()->route('kategori-all')->with('success','Berhasil');
+   }
+   public function softdelete($id){
+    $delete = Kategori::find($id)->delete();
+    return redirect()->back()->with('success','Berhasil Dihapus');
+   }
+
+   public function restore($id){
+    $restore = Kategori::withTrashed()->find($id)->restore();
+    return redirect()->back()->with('success','Berhasil Direstore');
+   }
+   public function permadelete($id){
+    $delete = Kategori::onlyTrashed()->find($id)->forceDelete();
+    return redirect()->back()->with('success','Berhasil Dihapus Selamanya');
    }
 }

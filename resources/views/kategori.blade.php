@@ -42,7 +42,7 @@
                                         @else
                                             <td>{{ $ini->created_at->diffForHumans() }}</td>
                                         @endif
-                                        <td> <a href="{{url('kategori/edit/'.$ini->id)}} " class=" btn btn-info">Edit</a> <a href="" class=" btn btn-danger">Delete</a></td>
+                                        <td> <a href="{{url('kategori/edit/'.$ini->id)}} " class=" btn btn-info">Edit</a> <a href="{{url('kategori/softdelete/'.$ini->id)}}" class=" btn btn-danger">Delete</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -74,7 +74,45 @@
                     </div>
                 </div>
             </div>
+            <div class=" row">
+                <div class=" col-md-8">
+                    <div class="card">
+                     
+                        <div class=" card-header">Deleted Kategori </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+
+                                
+                                @foreach ($trash as $ini)
+                                    <tr>
+                                        <th scope="row">{{ $kategori->firstItem()+$loop->index}}</th>
+                                        <td>{{ $ini->kategori_nama }}</td>
+                                        <td>{{ $ini->user->name }}</td>
+                                        @if ($ini->created_at == null)
+                                            <span class=" text-danger">Data Tidak Ditemukan</span>
+                                        @else
+                                            <td>{{ $ini->created_at->diffForHumans() }}</td>
+                                        @endif
+                                        <td> <a href="{{url('kategori/restore/'.$ini->id)}} " class=" btn btn-info">Restore</a> <a href="{{url('kategori/permadelete/'.$ini->id)}} " class=" btn btn-danger">Delete</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $trash->links() }}
+                    </div>
+                </div>
+              
+            </div>
         </div>
     </div>
 </x-app-layout>

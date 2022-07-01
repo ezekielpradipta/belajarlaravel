@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MultipleImageController;
 use App\Http\Controllers\ProdukController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,9 @@ Route::middleware([
     Route::get('/produk/edit/{id}',[ProdukController::class,'edit']);
     Route::get('/produk/delete/{id}',[ProdukController::class,'delete']);
     Route::post('/produk/update/{id}',[ProdukController::class,'update']);
+
+
+    //// Multiple Image ////
+    Route::get('/multiple/all',[MultipleImageController::class,'index'])->name('multiple-all');
+    Route::post('/multiple/store',[MultipleImageController::class,'store'])->name('multiple-store');
 });

@@ -21,6 +21,9 @@
                     <x-jet-nav-link href="{{route('produk-all')}}" >
                         Produk
                      </x-jet-nav-link>
+                     <x-jet-nav-link href="{{route('multiple-all')}}" >
+                        Multiple Image
+                     </x-jet-nav-link>
                 </div>
             </div>
 

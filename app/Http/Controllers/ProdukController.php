@@ -7,7 +7,7 @@ use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Image;
 class ProdukController extends Controller
 {
     /**
@@ -22,7 +22,7 @@ class ProdukController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $validate = $request->validate(
             [
                 'produk_nama' => 'required|unique:produks',
@@ -33,15 +33,18 @@ class ProdukController extends Controller
             ]
         );
 
-        $produk_image = $request->file('produk_image');
-        $random = hexdec(uniqid());
-        $image_extension = strtolower($produk_image->getClientOriginalExtension());
-        $image_nama = $random . '.' . $image_extension;
-        $image_location = 'image/produk/';
+         $produk_image = $request->file('produk_image');
+         $random = hexdec(uniqid()).'.'.$produk_image->getClientOriginalExtension();
 
-        $image_upload = $image_location . $image_nama;
-        $produk_image->move($image_location, $image_upload);
+         Image::make($produk_image)->resize(300,200)->save('image/produk/'.$random);
+        // $image_extension = strtolower($produk_image->getClientOriginalExtension());
+        // $image_nama = $random . '.' . $image_extension;
+        // $image_location = 'image/produk/';
 
+        // $image_upload = $image_location . $image_nama;
+        // $produk_image->move($image_location, $image_upload);
+        
+        $image_upload = 'image/produk/'.$random;
         Produk::insert([
             'produk_nama' => $request->produk_nama,
             'produk_image' => $image_upload,

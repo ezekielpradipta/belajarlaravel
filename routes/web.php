@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,11 @@ Route::middleware([
     Route::get('/kategori/softdelete/{id}',[KategoriController::class,'softdelete']);
     Route::get('/kategori/restore/{id}',[KategoriController::class,'restore']);
     Route::get('/kategori/permadelete/{id}',[KategoriController::class,'permadelete']);
+
+        ////// Produk Route /////
+    Route::get('/produk/all',[ProdukController::class,'index'])->name('produk-all');
+    Route::post('/produk/store',[ProdukController::class,'store'])->name('produk-store');
+    Route::get('/produk/edit/{id}',[ProdukController::class,'edit']);
+    Route::get('/produk/delete/{id}',[ProdukController::class,'delete']);
+    Route::post('/produk/update/{id}',[ProdukController::class,'update']);
 });

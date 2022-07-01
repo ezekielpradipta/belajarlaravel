@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{route('kategori-all')}}" >
                        Kategori
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{route('produk-all')}}" >
+                        Produk
+                     </x-jet-nav-link>
                 </div>
             </div>
 
